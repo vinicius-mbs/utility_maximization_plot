@@ -12,3 +12,5 @@ Dashed lines projecting the optimal bundle onto the axes,
 Axis labels highlighting the optimal quantities.
 
 The code is written in R using ggplot2, and is fully reproducible and easily extendable to other preference specifications.
+
+![Utility Maximization Plot](figures/utility_max_plot.png)
