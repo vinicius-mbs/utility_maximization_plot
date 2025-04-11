@@ -20,19 +20,23 @@ bc <- function(x) {
   -(P_x / P_y) * x + I / P_y
 }
 
-# With the Lagrangian function, and the first order conditions, 
-# we can find the points where utility is maximized:
+# Using the Lagrangian method and first-order conditions, 
+# we derive the optimal bundle (x*, y*) that maximizes utility subject to 
+# the budget constraint:
 x_star = alpha * I / P_x
 y_star = beta * I / P_y
+# Note that the result above result is sensitive to the choice 
+# of the utility function
 
-# Substituing in the utility function, we find this indifference curve (IC) value
+# Substituting in the utility function, we find this indifference curve (IC) 
+# value
 U2 = utility(x_star, y_star)
-U1 = U2 - 2 # Generating an IC bellow the utility maximazing point
-U3 = U2 + 2 # Generating an IC above the utility maximazing point
+U1 = U2 - 2 # Lower indifference curve (below the optimum)
+U3 = U2 + 2 # Higher indifference curve (above the optimum, not attainable)
 
-# As the value for the utility do not change in the entire indifference curve,
-# we can solve the utility equation for y and find its values 
-# IC as function of y:
+# As the value for the utility do not change in the entire indifference 
+# curve, we can solve the utility equation for y and express the IC as 
+# a function of x:
 y_ic = function(x, U){
   (U / x^alpha)^(1 / beta)
 }
@@ -56,9 +60,9 @@ ggplot() +
   geom_line(data = df_ic3, aes(x = x, y = y), color = 'orange', size = 1) +
   geom_hline(yintercept = 0, color = "black", linewidth = 0.5) +
   geom_vline(xintercept = 0, color = "black", linewidth = 0.5) +
-  geom_point(aes(x = x_star, y = y_star), color = "black", size = 3) +  # optimal point
-  geom_segment(aes(x = x_star, xend = x_star, y = 0, yend = y_star), linetype = "dashed", color = "grey40") +  # vertical line
-  geom_segment(aes(x = 0, xend = x_star, y = y_star, yend = y_star), linetype = "dashed", color = "grey40") +  # horizontal line
+  geom_point(aes(x = x_star, y = y_star), color = "black", size = 3) +  
+  geom_segment(aes(x = x_star, xend = x_star, y = 0, yend = y_star), linetype = "dashed", color = "grey40") +  
+  geom_segment(aes(x = 0, xend = x_star, y = y_star, yend = y_star), linetype = "dashed", color = "grey40") +  
   scale_x_continuous(
     breaks = c(0, 5, 10, 15, 20, round(x_star, 1)),
     labels = c("0", "5", "10", "15", "20", paste0("x* = ", round(x_star, 1)))
